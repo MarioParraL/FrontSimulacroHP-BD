@@ -7,7 +7,7 @@ export type UserDB = {
 };
 
 const env = await load();
-const url = Deno.env.get("MONGO_URL") || env.MONGO_URL;
+const MONGO_URL = env.MONGO_URL || Deno.env.get("MONGO_URL");
 if (!url) {
   throw new Error("MONGO_URL is not set");
 }
