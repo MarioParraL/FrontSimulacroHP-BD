@@ -6,8 +6,12 @@ export type UserDB = {
 };
 
 
+const url = Deno.env.get("MONGO_URL");
+if (!url) {
+  throw new Error("MONGO_URL is not set");
+}
 
-const client = new MongoClient("mongodb+srv://mparral:MPLnebrija25_@nebrija-cluster.huut8.mongodb.net/?retryWrites=true&w=majority&appName=Nebrija-Cluster");
+const client = new MongoClient(url);
 await client.connect();
 
 const db = client.db("usersDB");
