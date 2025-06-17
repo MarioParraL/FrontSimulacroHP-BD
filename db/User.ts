@@ -7,7 +7,7 @@ export type UserDB = {
 
 const url = Deno.env.get("MONGO_URL");
 if (!url) {
-   console.error("Need a MONGO_URL");
+     throw new Error("MONGO_URL is not set");
 }
 
 const client = new MongoClient(url);
