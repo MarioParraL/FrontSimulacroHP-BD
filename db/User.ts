@@ -1,3 +1,4 @@
+import { load } from "$std/dotenv/mod.ts";
 import { MongoClient } from "mongodb";
 
 export type UserDB = {
@@ -5,9 +6,10 @@ export type UserDB = {
   password: string;
 };
 
-const url = Deno.env.get("MONGO_URL");
+const env = await load();
+const url = Deno.env.get("MONGO_URL") || env.MONGO_URL;
 if (!url) {
-      Deno.exit(1);
+  throw new Error("MONGO_URL is not set");
 }
 
 const client = new MongoClient(url);
