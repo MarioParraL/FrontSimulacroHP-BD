@@ -1,4 +1,3 @@
-import { load } from "https://deno.land/std@0.204.0/dotenv/mod.ts";
 import { MongoClient } from "mongodb";
 
 export type UserDB = {
@@ -6,13 +5,9 @@ export type UserDB = {
   password: string;
 };
 
-const env = await load();
-const url = env.MONGO_URL || Deno.env.get("MONGO_URL");
-if (!url) {
-  throw new Error("MONGO_URL is not set");
-}
 
-const client = new MongoClient(url);
+
+const client = new MongoClient("mongodb+srv://mparral:MPLnebrija25_@nebrija-cluster.huut8.mongodb.net/?retryWrites=true&w=majority&appName=Nebrija-Cluster");
 await client.connect();
 
 const db = client.db("usersDB");
